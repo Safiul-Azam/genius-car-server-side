@@ -35,6 +35,17 @@ async function run() {
       const service = await serviceCollection.findOne(query)
       res.send(service)
     })
+    app.post('/service', async(req, res)=>{
+      const serviceDoc = req.body 
+      const result = await serviceCollection.insertOne(serviceDoc)
+      res.send(result)
+    })
+    app.delete('/service/:id', async(req, res)=>{
+      const id = req.params.id 
+      const query = {_id:ObjectId(id)}
+      const result = await serviceCollection.deleteOne(query)
+      res.send(result)
+    })
 
   }
   finally {
